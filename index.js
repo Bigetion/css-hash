@@ -72,4 +72,16 @@ function cssHash(getCssString) {
   return hashId;
 }
 
+function classNames(...args) {
+  return args
+    .filter((item) => {
+      if (typeof item === "string") {
+        return item.trim() !== "";
+      }
+      return false;
+    })
+    .join(" ");
+}
+
 module.exports.cssHash = cssHash;
+module.exports.classNames = classNames;
