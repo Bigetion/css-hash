@@ -1,0 +1,22 @@
+{
+  "name": "css-hash",
+  "version": "1.0.0",
+  "description": "css-in-js helper for react-components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bigetion/css-hash.git"
+  },
+  "keywords": [
+    "css-in-js"
+  ],
+  "author": "Bigetion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bigetion/css-hash/issues"
+  },
+  "homepage": "https://github.com/Bigetion/css-hash#readme"
+}
