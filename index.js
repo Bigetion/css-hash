@@ -35,12 +35,12 @@ function generateHashId(str) {
   return generateAlphabeticName(hash(str) >>> 0);
 }
 
-function addStyleSheet(css) {
+function addStyleSheet(css, id) {
   const head = document.head || document.getElementsByTagName("head")[0];
   const style = document.createElement("style");
   head.appendChild(style);
   style.setAttribute("type", "text/css");
-  style.setAttribute("data-inline-style", hashId);
+  style.setAttribute("data-inline-style", id);
   if (style.styleSheet) {
     style.styleSheet.cssText = css;
   } else {
@@ -66,7 +66,7 @@ function cssHash(getCssString) {
       `style[data-inline-style=${hashId}]`
     );
     if (!existElements) {
-      addStyleSheet(hashCssString);
+      addStyleSheet(hashCssString, hashId);
     }
   }
   return hashId;
