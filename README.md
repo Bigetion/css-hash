@@ -1,4 +1,4 @@
-## What is this
+## What is this?
 
 css-in-js library to help you style your react components.
 
@@ -13,7 +13,7 @@ npm i css-hash
 import React from "react";
 import { cssHash } from "css-hash";
 
-export default function Button({ children, className }) {
+function Button({ children, className }) {
   const buttonClass = cssHash(
     (subtituteClass) => `
       .${subtituteClass} {
