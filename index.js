@@ -62,11 +62,13 @@ function cssHash(getCssString) {
 
     const hashCssString = cssString.split(tmpId).join(hashId);
 
-    const existElements = document.querySelector(
-      `style[data-inline-style=${hashId}]`
-    );
-    if (!existElements) {
-      addStyleSheet(hashCssString, hashId);
+    if (typeof window === "object") {
+      const existElements = document.querySelector(
+        `style[data-inline-style=${hashId}]`
+      );
+      if (!existElements) {
+        addStyleSheet(hashCssString, hashId);
+      }
     }
   }
   return hashId;

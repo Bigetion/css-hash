@@ -1,6 +1,6 @@
 {
   "name": "css-hash",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "css-in-js helper for react-components",
   "main": "index.js",
   "scripts": {
