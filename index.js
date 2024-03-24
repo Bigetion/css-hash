@@ -1,3 +1,5 @@
+'use strict';
+
 function phash(h, x) {
   let i = x.length;
   while (i) {
@@ -28,29 +30,33 @@ function generateAlphabeticName(code) {
 }
 
 function generateId() {
-  return Math.random().toString(36).substr(2, 9);
+  return Math.random().toString(36).slice(2).slice(0, 9);
 }
 
 function generateHashId(str) {
   return generateAlphabeticName(hash(str) >>> 0);
 }
 
-function addStyleSheet(css, id) {
-  const head = document.head || document.getElementsByTagName("head")[0];
-  const style = document.createElement("style");
-  head.appendChild(style);
-  style.setAttribute("type", "text/css");
-  style.setAttribute("data-inline-style", id);
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    style.appendChild(document.createTextNode(css));
+function addStyleSheet(attributeId, attributeValue, cssString) {
+  const isElementExist = document.querySelector(
+    `style[${attributeId}=${attributeValue}]`
+  );
+  if (!isElementExist) {
+    const head = document.head || document.getElementsByTagName("head")[0];
+    const style = document.createElement("style");
+    head.appendChild(style);
+    style.setAttribute("type", "text/css");
+    style.setAttribute(attributeId, attributeValue);
+    if (style.styleSheet) {
+      style.styleSheet.cssText = cssString;
+    } else {
+      style.appendChild(document.createTextNode(cssString));
+    }
   }
 }
 
 function cssHash(getCssString) {
   let hashId = "";
-
   if (typeof getCssString === "function") {
     const tmpId = generateId();
 
@@ -59,17 +65,8 @@ function cssHash(getCssString) {
       .replace(/\s\s+/g, " ");
 
     hashId = generateHashId(cssString.split(tmpId).join(""));
-
     const hashCssString = cssString.split(tmpId).join(hashId);
-
-    if (typeof window === "object") {
-      const existElements = document.querySelector(
-        `style[data-inline-style=${hashId}]`
-      );
-      if (!existElements) {
-        addStyleSheet(hashCssString, hashId);
-      }
-    }
+    addStyleSheet("data-inline-style", hashId, hashCssString);
   }
   return hashId;
 }
@@ -85,5 +82,5 @@ function classNames(...args) {
     .join(" ");
 }
 
-module.exports.cssHash = cssHash;
-module.exports.classNames = classNames;
+exports.classNames = classNames;
+exports.cssHash = cssHash;
