@@ -18,14 +18,14 @@ function getAlphabeticChar(code) {
 
 function generateAlphabeticName(code) {
 	const charsLength = 52;
-	let name = '';
+	let name = "";
 	let x;
 	for (x = Math.abs(code); x > charsLength; x = (x / charsLength) | 0) {
 		name = getAlphabeticChar(x % charsLength) + name;
 	}
 	return (getAlphabeticChar(x % charsLength) + name).replace(
 		/(a)(d)/gi,
-		'$1-$2'
+		"$1-$2"
 	);
 }
 
@@ -42,10 +42,10 @@ function addStyleSheet(attributeId, attributeValue, cssString) {
 		`style[${attributeId}=${attributeValue}]`
 	);
 	if (!isElementExist) {
-		const head = document.head || document.getElementsByTagName('head')[0];
-		const style = document.createElement('style');
+		const head = document.head || document.getElementsByTagName("head")[0];
+		const style = document.createElement("style");
 		head.appendChild(style);
-		style.setAttribute('type', 'text/css');
+		style.setAttribute("type", "text/css");
 		style.setAttribute(attributeId, attributeValue);
 		if (style.styleSheet) {
 			style.styleSheet.cssText = cssString;
@@ -56,17 +56,17 @@ function addStyleSheet(attributeId, attributeValue, cssString) {
 }
 
 function cssHash(getCssString) {
-	let hashId = '';
-	if (typeof getCssString === 'function') {
+	let hashId = "";
+	if (typeof getCssString === "function") {
 		const tmpId = generateId();
 
 		const cssString = getCssString(tmpId)
-			.replace(/\n/g, '')
-			.replace(/\s\s+/g, ' ');
+			.replace(/\n/g, "")
+			.replace(/\s\s+/g, " ");
 
-		hashId = generateHashId(cssString.split(tmpId).join(''));
+		hashId = generateHashId(cssString.split(tmpId).join(""));
 		const hashCssString = cssString.split(tmpId).join(hashId);
-		addStyleSheet('data-inline-style', hashId, hashCssString);
+		addStyleSheet("data-inline-style", hashId, hashCssString);
 	}
 	return hashId;
 }
@@ -74,27 +74,30 @@ function cssHash(getCssString) {
 function classNames(...args) {
 	return args
 		.filter((item) => {
-			if (typeof item === 'string') {
-				return item.trim() !== '';
+			if (typeof item === "string") {
+				return item.trim() !== "";
 			}
 			return false;
 		})
-		.join(' ');
+		.join(" ");
 }
 
-function pseudoClasses(pseudoType, classNames) {
-	if (!Array.isArray(classNames)) {
-		classNames = classNames.split(' ');
+function pseudoClasses(pseudoType, classNamesTmp) {
+	let classNames = [];
+	if (Array.isArray(classNamesTmp)) {
+		classNames = [...classNamesTmp];
+	} else if (typeof classNamesTmp === "string") {
+		classNames = classNamesTmp.split(" ");
 	}
 	return classNames
 		.filter((o) => !!o)
 		.map((className) => {
 			return className
-				.split(' ')
-				.map((o) => `${pseudoType}${o.trim()}`)
-				.join(' ');
+				.split(" ")
+				.map((c) => `${pseudoType}${c.trim()}`)
+				.join(" ");
 		})
-		.join(' ');
+		.join(" ");
 }
 
 exports.classNames = classNames;
