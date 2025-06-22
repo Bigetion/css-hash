@@ -1,0 +1,31 @@
+# Dependency directories
+node_modules/
+
+# Production build files
+/dist/*
+!/dist/index.js
+!/dist/index.mjs
+!/dist/index.d.ts
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS specific
+.DS_Store
+Thumbs.db

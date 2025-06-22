@@ -1,22 +1,54 @@
 {
   "name": "css-hash",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "css-in-js helper for react-components",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "sideEffects": false,  "scripts": {
+    "setup": "node setup.js",
+    "build": "node scripts/build.js",
+    "build:cjs": "node scripts/build-cjs.js",
+    "build:esm": "node scripts/build-esm.js",
+    "build:types": "node scripts/build-types.js",
+    "examples": "node run-examples.js",
+    "test": "jest",
+    "lint": "eslint src",
+    "verify": "node verify.js",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Bigetion/css-hash.git"
   },
   "keywords": [
-    "css-in-js"
+    "css-in-js",
+    "react",
+    "styling",
+    "css"
   ],
   "author": "Bigetion",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Bigetion/css-hash/issues"
   },
-  "homepage": "https://github.com/Bigetion/css-hash#readme"
+  "homepage": "https://github.com/Bigetion/css-hash#readme",
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "babel-jest": "^29.6.1",
+    "jest": "^29.6.1",
+    "jest-environment-jsdom": "^29.6.1"
+  }
 }
