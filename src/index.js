@@ -158,19 +158,52 @@ function cssHash(getCssString) {
 }
 
 /**
- * Combines multiple class names into a single string, filtering out empty values
- * @param {...string} args - Class names to combine
+ * Combines multiple class names into a single string, filtering out falsy values
+ * Supports strings, numbers, arrays, and objects with boolean values
+ * @param {...any} args - Class names to combine
  * @returns {string} Combined class names as a string
  */
 function classNames(...args) {
-  return args
-    .filter((item) => {
-      if (typeof item === "string") {
-        return item.trim() !== "";
+  const classes = [];
+  
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    if (!arg) continue; // Skip falsy values: null, undefined, false, 0, ""
+    
+    const argType = typeof arg;
+    
+    // Handle strings and numbers
+    if (argType === 'string' || argType === 'number') {
+      const trimmed = String(arg).trim();
+      if (trimmed) {
+        classes.push(trimmed);
       }
-      return false;
-    })
-    .join(" ");
+      continue;
+    }
+    
+    // Handle arrays recursively
+    if (Array.isArray(arg)) {
+      const inner = classNames(...arg); // Recursive call
+      if (inner) {
+        classes.push(inner);
+      }
+      continue;
+    }
+    
+    // Handle objects - include keys where the value is truthy
+    if (argType === 'object') {
+      for (const key in arg) {
+        if (Object.prototype.hasOwnProperty.call(arg, key) && arg[key]) {
+          const trimmed = key.trim();
+          if (trimmed) {
+            classes.push(trimmed);
+          }
+        }
+      }
+    }
+  }
+  
+  return classes.join(' ');
 }
 
 /**
