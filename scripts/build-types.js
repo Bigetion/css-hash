@@ -6,8 +6,7 @@ const destFile = path.join(__dirname, '../dist/index.d.ts');
 
 console.log('Generating TypeScript definitions...');
 
-try {
-  const typeDefs = `/**
+try {  const typeDefs = `/**
  * Creates a CSS class with a unique hash ID based on the provided CSS string
  * @param getCssString - Function that receives a substitute class name and returns a CSS string
  * @returns The generated hash ID to use as a CSS class name
@@ -22,12 +21,10 @@ export function cssHash(getCssString: (substituteClass: string) => string): stri
 export function classNames(...args: string[]): string;
 
 /**
- * Creates pseudo-class selectors from regular class names
- * @param pseudoType - The pseudo-class selector (e.g. ':hover', ':active')
- * @param classNamesTmp - Class names as a string or array of strings
- * @returns Class names with pseudo-class selectors applied
+ * Clears the internal CSS cache
+ * Useful for testing or when you need to reset the styling
  */
-export function pseudoClasses(pseudoType: string, classNamesTmp: string | string[]): string;`;
+export function clearCssCache(): void;`;
 
   // Create dist directory if it doesn't exist
   if (!fs.existsSync(path.dirname(destFile))) {

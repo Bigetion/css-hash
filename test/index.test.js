@@ -1,4 +1,4 @@
-import { cssHash, classNames, pseudoClasses } from '../src/index';
+import { cssHash, classNames } from '../src/index';
 
 describe('classNames', () => {
   test('should combine class names', () => {
@@ -9,12 +9,7 @@ describe('classNames', () => {
   });
 });
 
-describe('pseudoClasses', () => {
-  test('should add pseudo class to each class name', () => {
-    expect(pseudoClasses(':hover', 'foo bar')).toBe(':hoverfoo :hoverbar');
-    expect(pseudoClasses(':active', ['foo', 'bar'])).toBe(':activefoo :activebar');
-  });
-});
+
 
 // Test for cssHash requires DOM which is mocked by jsdom
 describe('cssHash', () => {

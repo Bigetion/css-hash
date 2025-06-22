@@ -206,30 +206,7 @@ function classNames(...args) {
   return classes.join(' ');
 }
 
-/**
- * Creates pseudo-class selectors from regular class names
- * @param {string} pseudoType - The pseudo-class selector (e.g. ':hover', ':active')
- * @param {string|string[]} classNamesTmp - Class names as a string or array of strings
- * @returns {string} Class names with pseudo-class selectors applied
- */
-function pseudoClasses(pseudoType, classNamesTmp) {
-  /** @type {string[]} */
-  let classList = [];
-  if (Array.isArray(classNamesTmp)) {
-    classList = [...classNamesTmp];
-  } else if (typeof classNamesTmp === "string") {
-    classList = classNamesTmp.split(" ");
-  }
-  return classList
-    .filter((o) => !!o)
-    .map((className) => {
-      return className
-        .split(" ")
-        .map((c) => `${pseudoType}${c.trim()}`)
-        .join(" ");
-    })
-    .join(" ");
-}
+
 
 /**
  * Clears the internal CSS cache
@@ -244,4 +221,4 @@ function clearCssCache() {
 
 
 // ES Module export - this will be tree-shaken in ESM builds and ignored in CJS
-export { cssHash, classNames, pseudoClasses, clearCssCache };
+export { cssHash, classNames, clearCssCache };

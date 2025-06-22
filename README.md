@@ -6,7 +6,6 @@ A lightweight CSS-in-JS library for styling React components with auto-generated
 
 - 🔍 Generates unique hash-based class names
 - 🧩 Simple API for composing class names
-- 🔄 Supports pseudo-class selectors
 - 🔄 Works in both ESM and CommonJS environments
 - 🔄 TypeScript definitions included
 - 🚀 Zero dependencies
@@ -78,14 +77,6 @@ const activeClass = classNames("btn", "", "active", null);
 
 ### Using Pseudo Classes
 
-```jsx
-import { pseudoClasses } from "css-hash";
-
-// Returns ":hoverfoo :hoverbar"
-const hoverClass = pseudoClasses(":hover", "foo bar");
-
-// Also works with arrays - returns ":activefoo :activebar"
-const activeClass = pseudoClasses(":active", ["foo", "bar"]);
 ```
 
 ## API Reference
@@ -101,16 +92,14 @@ Generates a unique class name and injects the provided CSS into the document.
 
 Combines multiple class names, filtering out empty values.
 
-- `args`: Class names to combine
+- `args`: Class names to combine (can be strings, arrays, or objects with boolean values)
 - Returns: Combined class names as a space-separated string
 
-### pseudoClasses(pseudoType, classNames)
+### clearCssCache()
 
-Applies a pseudo-class prefix to a list of class names.
+Clears the internal CSS cache used by the cssHash function.
 
-- `pseudoType`: The pseudo-class selector (e.g. ':hover', ':active')
-- `classNames`: Class names as a space-separated string or array of strings
-- Returns: Class names with pseudo-class selectors applied
+- Useful for testing or when you need to reset the styling
 
 ## Browser Support
 

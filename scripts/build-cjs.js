@@ -22,7 +22,7 @@ try {
 module.exports = {
   cssHash,
   classNames,
-  pseudoClasses
+  clearCssCache
 };`
     );
   

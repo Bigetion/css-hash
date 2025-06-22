@@ -13,9 +13,7 @@ export function cssHash(getCssString: (substituteClass: string) => string): stri
 export function classNames(...args: string[]): string;
 
 /**
- * Creates pseudo-class selectors from regular class names
- * @param pseudoType - The pseudo-class selector (e.g. ':hover', ':active')
- * @param classNamesTmp - Class names as a string or array of strings
- * @returns Class names with pseudo-class selectors applied
+ * Clears the internal CSS cache
+ * Useful for testing or when you need to reset the styling
  */
-export function pseudoClasses(pseudoType: string, classNamesTmp: string | string[]): string;
+export function clearCssCache(): void;
